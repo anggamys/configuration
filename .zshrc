@@ -1,110 +1,166 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
-# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="spaceship"
-
-# Spaceship theme configuration
-SPACESHIP_PROMPT_ASYNC=true
+# Prompt umum
 SPACESHIP_PROMPT_ADD_NEWLINE=true
+SPACESHIP_PROMPT_ASYNC=true
+
+# Urutan section: masukkan semua section dari 20 link + yang kamu pakai
+SPACESHIP_PROMPT_ORDER=(
+  time
+  user
+  host
+  dir
+  git
+  exec_time
+  node
+  bun
+  golang
+  java
+  php
+  python
+  rust
+  package
+  kubectl
+  docker
+  docker_compose
+  venv
+  sudo
+  line_sep
+  char
+)
+
+# Kanan (kosong, biar bersih; tambahkan bila perlu)
+SPACESHIP_RPROMPT_ORDER=()
+
+# time
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_TIME_TIMEZONE="Asia/Jakarta"
 SPACESHIP_TIME_FORMAT="at %T"
 SPACESHIP_TIME_COLOR="yellow"
+
+# user
 SPACESHIP_USER_SHOW=always
 SPACESHIP_USER_COLOR="yellow"
+
+# host
+SPACESHIP_HOST_SHOW=always
+SPACESHIP_HOST_COLOR="blue"
+SPACESHIP_HOST_PREFIX="@"
+
+# dir (directory)
+SPACESHIP_DIR_SHOW=true
 SPACESHIP_DIR_COLOR="cyan"
-SPACESHIP_DIR_TRUNCATE_TO=3
-SPACESHIP_DIR_TRUNCATE_BEGINNING=true
+# Dokumentasi modern menggunakan TRUNC, bukan TRUNCATE_TO/BEGINNING
+SPACESHIP_DIR_TRUNC=3
+SPACESHIP_DIR_TRUNC_PREFIX="…/"
+SPACESHIP_DIR_LOCK_SYMBOL="🔒"
+SPACESHIP_DIR_PREFIX="in "
+
+# git
 SPACESHIP_GIT_SHOW=true
+SPACESHIP_GIT_ASYNC=true
 SPACESHIP_GIT_BRANCH_COLOR="magenta"
 SPACESHIP_GIT_STATUS_COLOR="red"
 SPACESHIP_GIT_STATUS_UNTRACKED="✗"
 SPACESHIP_GIT_STATUS_ADDED="✚"
-SPACESHIP_GIT_STATUS_DELETED="✖"
 SPACESHIP_GIT_STATUS_MODIFIED="✹"
+SPACESHIP_GIT_STATUS_DELETED="✖"
 SPACESHIP_GIT_STATUS_RENAMED="➜"
 SPACESHIP_GIT_STATUS_CLEAN="✔"
+SPACESHIP_GIT_PREFIX="on "
+SPACESHIP_GIT_SYMBOL=" "
+
+# exec_time (pakai bawaan Spaceship, bukan hook manual)
+SPACESHIP_EXEC_TIME_SHOW=true
+SPACESHIP_EXEC_TIME_ELAPSED=1
+SPACESHIP_EXEC_TIME_PRECISION=2
+SPACESHIP_EXEC_TIME_PREFIX="⏱  "
+
+# node
+SPACESHIP_NODE_SHOW=true
+SPACESHIP_NODE_PREFIX="node "
+SPACESHIP_NODE_COLOR="green"
+
+# bun
+SPACESHIP_BUN_SHOW=true
+SPACESHIP_BUN_PREFIX="bun "
+SPACESHIP_BUN_COLOR="yellow"
+
+# golang
+SPACESHIP_GOLANG_SHOW=true
+SPACESHIP_GOLANG_PREFIX="go "
+SPACESHIP_GOLANG_COLOR="cyan"
+
+# java
+SPACESHIP_JAVA_SHOW=true
+SPACESHIP_JAVA_PREFIX="java "
+SPACESHIP_JAVA_COLOR="red"
+
+# kubectl
+SPACESHIP_KUBECTL_SHOW=true
+SPACESHIP_KUBECTL_PREFIX="k8s "
+SPACESHIP_KUBECTL_COLOR="blue"
+SPACESHIP_KUBECTL_CONTEXT_SHOW=true
+SPACESHIP_KUBECTL_NAMESPACE_SHOW=true
+
+# package (package.json version)
+SPACESHIP_PACKAGE_SHOW=true
+SPACESHIP_PACKAGE_PREFIX="pkg "
+SPACESHIP_PACKAGE_COLOR="yellow"
+
+# php
+SPACESHIP_PHP_SHOW=true
+SPACESHIP_PHP_PREFIX="php "
+SPACESHIP_PHP_COLOR="magenta"
+
+# python
+SPACESHIP_PYTHON_SHOW=true
+SPACESHIP_PYTHON_PREFIX="🐍 "
+SPACESHIP_PYTHON_COLOR="green"
+
+# rust
+SPACESHIP_RUST_SHOW=true
+SPACESHIP_RUST_PREFIX="rs "
+SPACESHIP_RUST_COLOR="red"
+
+# venv (virtualenv/conda)
+SPACESHIP_VENV_SHOW=true
+SPACESHIP_VENV_PREFIX="("
+SPACESHIP_VENV_SUFFIX=") "
+SPACESHIP_VENV_COLOR="green"
+
+# docker
+SPACESHIP_DOCKER_SHOW=true
+SPACESHIP_DOCKER_PREFIX="🐳 "
+SPACESHIP_DOCKER_COLOR="cyan"
+
+# docker-compose (dibedakan)
+SPACESHIP_DOCKER_COMPOSE_SHOW=true
+SPACESHIP_DOCKER_COMPOSE_PREFIX="dc:"
+SPACESHIP_DOCKER_COMPOSE_SYMBOL="🧩"
+SPACESHIP_DOCKER_COMPOSE_COLOR="blue"
+
+# sudo
+SPACESHIP_SUDO_SHOW=true
+SPACESHIP_SUDO_SYMBOL="⚡ "
+SPACESHIP_SUDO_PREFIX=""
+SPACESHIP_SUDO_COLOR="yellow"
+
+# char (prompt char)
 SPACESHIP_CHAR_COLOR="green"
 SPACESHIP_CHAR_SUCCESS="❯"
 SPACESHIP_CHAR_ERROR="❯"
 SPACESHIP_CHAR_SYMBOL="➜"
 SPACESHIP_CHAR_NEWLINE_FIRST_PROMPT=true
 SPACESHIP_CHAR_SUFFIX=" "
-SPACESHIP_PROMPT_ORDER=(time user dir git line_sep char)
+
+ZSH_THEME="spaceship"
 
 # Update behavior
 zstyle ':omz:update' mode reminder
 zstyle ':omz:update' frequency 13
 
-# History configuration
-HISTSIZE=10000
-SAVEHIST=10000
-setopt HIST_VERIFY
-setopt SHARE_HISTORY
-setopt APPEND_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_REDUCE_BLANKS
-
-# General zsh options
-setopt NO_CLOBBER              # Prevent accidental file overwrites
-setopt AUTO_CD                 # cd to directory by typing its name
-setopt CORRECT                 # Command correction
-setopt COMPLETE_ALIASES        # Complete aliases
-
-# Command execution timer
-autoload -U add-zsh-hook
-_command_time_preexec() {
-    timer=$(($(date +%s%0N)/1000000))
-}
-
-_command_time_precmd() {
-    if [ $timer ]; then
-        local now=$(($(date +%s%0N)/1000000))
-        local elapsed=$(($now - $timer))
-        
-        # Only show for commands that take longer than 1 second
-        if [ $elapsed -gt 1000 ]; then
-            if [ $elapsed -gt 60000 ]; then
-                # Show minutes and seconds for long commands
-                local minutes=$((elapsed / 60000))
-                local seconds=$(((elapsed % 60000) / 1000))
-                echo "⏱️  took ${minutes}m ${seconds}s"
-            elif [ $elapsed -gt 10000 ]; then
-                # Show seconds with 1 decimal place for medium commands
-                local seconds=$((elapsed / 1000))
-                local decimals=$(((elapsed % 1000) / 100))
-                echo "⏱️  took ${seconds}.${decimals}s"
-            else
-                # Show milliseconds for quick commands
-                local seconds=$((elapsed / 1000))
-                local ms=$((elapsed % 1000))
-                printf "⏱️  took %d.%03ds\n" $seconds $ms
-            fi
-        fi
-        
-        unset timer
-    fi
-}
-
-add-zsh-hook preexec _command_time_preexec
-add-zsh-hook precmd _command_time_precmd
-
-# Performance optimizations
-DISABLE_UNTRACKED_FILES_DIRTY=true  # Faster git status for large repos
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-ZSH_AUTOSUGGEST_USE_ASYNC=true
-ZSH_AUTOSUGGEST_MANUAL_REBIND=true
-
-# Plugins configuration
+# Plugins (pertahankan, syntax-highlighting terakhir)
 plugins=(
   git
   zsh-z
@@ -120,42 +176,59 @@ plugins=(
 # Load Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
-# Key bindings
-bindkey '^[[C' autosuggest-accept           # Right arrow to accept suggestion
-bindkey '^[[A' history-substring-search-up   # Up arrow for history search
-bindkey '^[[B' history-substring-search-down # Down arrow for history search
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_VERIFY
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+
+setopt NO_CLOBBER
+setopt AUTO_CD
+setopt CORRECT
+setopt COMPLETE_ALIASES
+
+bindkey '^[[C' autosuggest-accept
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 bindkey '^R' history-incremental-search-backward
 
-# Environment variables
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR="nvim"
 export BROWSER="firefox"
 export PAGER="less"
 
-# Less configuration
+# Less
 export LESS='-R -i -w -M -z-4'
 export LESSHISTFILE="-"
 
-# PATH configuration
-export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-export PATH="$HOME/.config/composer/vendor/bin:$PATH"
-export PATH="/home/workspace/.config/herd-lite/bin:$PATH"
+# PATH modern Zsh (unik & rapi)
+path=(
+  $HOME/.local/bin
+  $HOME/bin
+  $HOME/.config/composer/vendor/bin
+  /home/workspace/.config/herd-lite/bin
+  $path
+)
+typeset -U path
 
-# Development environments
-# NVM (Node Version Manager) for Node.js, npm, npx
+# NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
 # Bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+path=("$BUN_INSTALL/bin" $path)
 
 # Rust cargo
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
-# PHP configuration
+# PHP
 export PHP_INI_SCAN_DIR="/home/workspace/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
 # Linuxbrew
@@ -164,23 +237,11 @@ if [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
 fi
 
 # ROS2 Humble
-if [ -f "/opt/ros/humble/setup.zsh" ]; then
-  source /opt/ros/humble/setup.zsh
-fi
+[ -f "/opt/ros/humble/setup.zsh" ] && source /opt/ros/humble/setup.zsh
 
-# ROS2 workspace (colcon build result)
-if [ -f "$HOME/ros2_ws/install/setup.zsh" ]; then
-  source $HOME/ros2_ws/install/setup.zsh
-fi
+# ROS2 workspace
+[ -f "$HOME/ros2_ws/install/setup.zsh" ] && source "$HOME/ros2_ws/install/setup.zsh"
 
-# Workspace & tools (uncomment if needed)
-# export PATH=$PATH:/home/workspace/ardu_ws/Micro-XRCE-DDS-Gen/scripts
-
-# Ardupilot completion (uncomment if needed)
-# [ -f "/home/workspace/developments/robotics/ardupilot/Tools/completion/completion.bash" ] && \
-#   source "/home/workspace/developments/robotics/ardupilot/Tools/completion/completion.bash"
-
-# Common aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -210,7 +271,7 @@ alias gb='git branch'
 alias gco='git checkout'
 alias glog='git log --oneline --graph --decorate'
 
-# Development aliases
+# Dev aliases
 alias py='python3'
 alias pip='pip3'
 alias n='npm'
@@ -225,60 +286,46 @@ alias myip='curl -s https://ipinfo.io/ip'
 alias weather='curl wttr.in'
 alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'
 
-# Function to create and cd into directory
-mkcd() {
-    mkdir -p "$1" && cd "$1"
-}
+mkcd() { mkdir -p "$1" && cd "$1"; }
 
-# Function to extract various archive formats (enhanced)
 extract() {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2)   tar xjf $1     ;;
-            *.tar.gz)    tar xzf $1     ;;
-            *.bz2)       bunzip2 $1     ;;
-            *.rar)       unrar e $1     ;;
-            *.gz)        gunzip $1      ;;
-            *.tar)       tar xf $1      ;;
-            *.tbz2)      tar xjf $1     ;;
-            *.tgz)       tar xzf $1     ;;
-            *.zip)       unzip $1       ;;
-            *.Z)         uncompress $1  ;;
-            *.7z)        7z x $1        ;;
-            *)           echo "'$1' cannot be extracted via extract()" ;;
-        esac
-    else
-        echo "'$1' is not a valid file"
-    fi
+  if [ -f "$1" ]; then
+    case "$1" in
+      *.tar.bz2)   tar xjf "$1"     ;;
+      *.tar.gz)    tar xzf "$1"     ;;
+      *.bz2)       bunzip2 "$1"     ;;
+      *.rar)       unrar e "$1"     ;;
+      *.gz)        gunzip "$1"      ;;
+      *.tar)       tar xf "$1"      ;;
+      *.tbz2)      tar xjf "$1"     ;;
+      *.tgz)       tar xzf "$1"     ;;
+      *.zip)       unzip "$1"       ;;
+      *.Z)         uncompress "$1"  ;;
+      *.7z)        7z x "$1"        ;;
+      *)           echo "'$1' tidak dikenali" ;;
+    esac
+  else
+    echo "'$1' bukan file valid"
+  fi
 }
 
-# Function to find and kill processes
-killp() {
-    ps aux | grep $1 | grep -v grep | awk '{print $2}' | xargs kill -9
-}
+killp() { ps aux | grep "$1" | grep -v grep | awk '{print $2}' | xargs kill -9 2>/dev/null; }
 
-# Function to create backup of files
-backup() {
-    cp "$1" "$1.backup.$(date +%Y%m%d_%H%M%S)"
-}
+backup() { cp "$1" "$1.backup.$(date +%Y%m%d_%H%M%S)"; }
 
-# Load local configuration if exists
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
-# Load aliases if exists
 [ -f ~/.aliases ] && source ~/.aliases
-
-# Load functions if exists
 [ -f ~/.functions ] && source ~/.functions
 
-# Completion initialization (should be near the end)
+zmodload zsh/complist
 autoload -U compinit
-compinit
+compinit -C
 
-# Load zsh-completions if installed via plugins
-if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+# ROS2 autocomplete
+if command -v register-python-argcomplete >/dev/null 2>&1; then
+  eval "$(register-python-argcomplete ros2)"
+  eval "$(register-python-argcomplete colcon)"
 fi
 
-# Final PATH cleanup (remove duplicates)
-typeset -U PATH
+export ANDROID_HOME=$HOME/Android/Sdk
+path+=($ANDROID_HOME/emulator $ANDROID_HOME/platform-tools)
