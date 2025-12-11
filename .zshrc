@@ -1,10 +1,8 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-# Prompt umum
 SPACESHIP_PROMPT_ADD_NEWLINE=true
 SPACESHIP_PROMPT_ASYNC=true
 
-# Urutan section: masukkan semua section dari 20 link + yang kamu pakai
 SPACESHIP_PROMPT_ORDER=(
   time
   user
@@ -29,34 +27,27 @@ SPACESHIP_PROMPT_ORDER=(
   char
 )
 
-# Kanan (kosong, biar bersih; tambahkan bila perlu)
 SPACESHIP_RPROMPT_ORDER=()
 
-# time
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_TIME_TIMEZONE="Asia/Jakarta"
 SPACESHIP_TIME_FORMAT="at %T"
 SPACESHIP_TIME_COLOR="yellow"
 
-# user
 SPACESHIP_USER_SHOW=always
 SPACESHIP_USER_COLOR="yellow"
 
-# host
 SPACESHIP_HOST_SHOW=always
 SPACESHIP_HOST_COLOR="blue"
 SPACESHIP_HOST_PREFIX="@"
 
-# dir (directory)
 SPACESHIP_DIR_SHOW=true
 SPACESHIP_DIR_COLOR="cyan"
-# Dokumentasi modern menggunakan TRUNC, bukan TRUNCATE_TO/BEGINNING
 SPACESHIP_DIR_TRUNC=3
 SPACESHIP_DIR_TRUNC_PREFIX="…/"
 SPACESHIP_DIR_LOCK_SYMBOL="🔒"
 SPACESHIP_DIR_PREFIX="in "
 
-# git
 SPACESHIP_GIT_SHOW=true
 SPACESHIP_GIT_ASYNC=true
 SPACESHIP_GIT_BRANCH_COLOR="magenta"
@@ -70,83 +61,68 @@ SPACESHIP_GIT_STATUS_CLEAN="✔"
 SPACESHIP_GIT_PREFIX="on "
 SPACESHIP_GIT_SYMBOL=" "
 
-# exec_time (pakai bawaan Spaceship, bukan hook manual)
 SPACESHIP_EXEC_TIME_SHOW=true
 SPACESHIP_EXEC_TIME_ELAPSED=1
 SPACESHIP_EXEC_TIME_PRECISION=2
 SPACESHIP_EXEC_TIME_PREFIX="⏱  "
 
-# node
 SPACESHIP_NODE_SHOW=true
 SPACESHIP_NODE_PREFIX="node "
 SPACESHIP_NODE_COLOR="green"
 
-# bun
 SPACESHIP_BUN_SHOW=true
 SPACESHIP_BUN_PREFIX="bun "
 SPACESHIP_BUN_COLOR="yellow"
 
-# golang
 SPACESHIP_GOLANG_SHOW=true
 SPACESHIP_GOLANG_PREFIX="go "
 SPACESHIP_GOLANG_COLOR="cyan"
 
-# java
 SPACESHIP_JAVA_SHOW=true
 SPACESHIP_JAVA_PREFIX="java "
 SPACESHIP_JAVA_COLOR="red"
 
-# kubectl
 SPACESHIP_KUBECTL_SHOW=true
 SPACESHIP_KUBECTL_PREFIX="k8s "
 SPACESHIP_KUBECTL_COLOR="blue"
 SPACESHIP_KUBECTL_CONTEXT_SHOW=true
 SPACESHIP_KUBECTL_NAMESPACE_SHOW=true
 
-# package (package.json version)
 SPACESHIP_PACKAGE_SHOW=true
 SPACESHIP_PACKAGE_PREFIX="pkg "
 SPACESHIP_PACKAGE_COLOR="yellow"
 
-# php
 SPACESHIP_PHP_SHOW=true
 SPACESHIP_PHP_PREFIX="php "
 SPACESHIP_PHP_COLOR="magenta"
 
-# python
 SPACESHIP_PYTHON_SHOW=true
 SPACESHIP_PYTHON_PREFIX="🐍 "
 SPACESHIP_PYTHON_COLOR="green"
 
-# rust
 SPACESHIP_RUST_SHOW=true
 SPACESHIP_RUST_PREFIX="rs "
 SPACESHIP_RUST_COLOR="red"
 
-# venv (virtualenv/conda)
 SPACESHIP_VENV_SHOW=true
 SPACESHIP_VENV_PREFIX="("
 SPACESHIP_VENV_SUFFIX=") "
 SPACESHIP_VENV_COLOR="green"
 
-# docker
 SPACESHIP_DOCKER_SHOW=true
 SPACESHIP_DOCKER_PREFIX="🐳 "
 SPACESHIP_DOCKER_COLOR="cyan"
 
-# docker-compose (dibedakan)
 SPACESHIP_DOCKER_COMPOSE_SHOW=true
 SPACESHIP_DOCKER_COMPOSE_PREFIX="dc:"
 SPACESHIP_DOCKER_COMPOSE_SYMBOL="🧩"
 SPACESHIP_DOCKER_COMPOSE_COLOR="blue"
 
-# sudo
 SPACESHIP_SUDO_SHOW=true
 SPACESHIP_SUDO_SYMBOL="⚡ "
 SPACESHIP_SUDO_PREFIX=""
 SPACESHIP_SUDO_COLOR="yellow"
 
-# char (prompt char)
 SPACESHIP_CHAR_COLOR="green"
 SPACESHIP_CHAR_SUCCESS="❯"
 SPACESHIP_CHAR_ERROR="❯"
@@ -156,11 +132,9 @@ SPACESHIP_CHAR_SUFFIX=" "
 
 ZSH_THEME="spaceship"
 
-# Update behavior
 zstyle ':omz:update' mode reminder
 zstyle ':omz:update' frequency 13
 
-# Plugins (pertahankan, syntax-highlighting terakhir)
 plugins=(
   git
   zsh-z
@@ -173,7 +147,6 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-# Load Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
 HISTSIZE=10000
@@ -202,11 +175,9 @@ export EDITOR="nvim"
 export BROWSER="firefox"
 export PAGER="less"
 
-# Less
 export LESS='-R -i -w -M -z-4'
 export LESSHISTFILE="-"
 
-# PATH modern Zsh (unik & rapi)
 path=(
   $HOME/.local/bin
   $HOME/bin
@@ -216,31 +187,33 @@ path=(
 )
 typeset -U path
 
-# NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
-# Bun
 export BUN_INSTALL="$HOME/.bun"
 path=("$BUN_INSTALL/bin" $path)
 
-# Rust cargo
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
-# PHP
 export PHP_INI_SCAN_DIR="/home/workspace/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
-# Linuxbrew
 if [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# ROS2 Humble
+zmodload zsh/complist
+autoload -U compinit
+compinit -C
+
 [ -f "/opt/ros/humble/setup.zsh" ] && source /opt/ros/humble/setup.zsh
 
-# ROS2 workspace
 [ -f "$HOME/ros2_ws/install/setup.zsh" ] && source "$HOME/ros2_ws/install/setup.zsh"
+
+if command -v register-python-argcomplete >/dev/null 2>&1; then
+  eval "$(register-python-argcomplete ros2)"
+  eval "$(register-python-argcomplete colcon)"
+fi
 
 alias ll='ls -alF'
 alias la='ls -A'
@@ -260,7 +233,9 @@ alias h='history'
 alias j='jobs -l'
 alias path='echo -e ${PATH//:/\\n}'
 
-# Git aliases
+alias gf='git fetch'
+alias gm='git merge'
+alias gcl='git clone'
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
@@ -271,16 +246,14 @@ alias gb='git branch'
 alias gco='git checkout'
 alias glog='git log --oneline --graph --decorate'
 
-# Dev aliases
 alias py='python3'
 alias pip='pip3'
 alias n='npm'
 alias y='yarn'
 alias d='docker'
-alias dc='docker-compose'
+alias dc='docker compose'
 alias k='kubectl'
 
-# System aliases
 alias ports='netstat -tulanp'
 alias myip='curl -s https://ipinfo.io/ip'
 alias weather='curl wttr.in'
@@ -316,16 +289,6 @@ backup() { cp "$1" "$1.backup.$(date +%Y%m%d_%H%M%S)"; }
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.aliases ] && source ~/.aliases
 [ -f ~/.functions ] && source ~/.functions
-
-zmodload zsh/complist
-autoload -U compinit
-compinit -C
-
-# ROS2 autocomplete
-if command -v register-python-argcomplete >/dev/null 2>&1; then
-  eval "$(register-python-argcomplete ros2)"
-  eval "$(register-python-argcomplete colcon)"
-fi
 
 export ANDROID_HOME=$HOME/Android/Sdk
 path+=($ANDROID_HOME/emulator $ANDROID_HOME/platform-tools)
