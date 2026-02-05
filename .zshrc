@@ -151,18 +151,25 @@ source $ZSH/oh-my-zsh.sh
 
 HISTSIZE=10000
 SAVEHIST=10000
+HISTFILE="$HOME/.zsh_history"
 setopt HIST_VERIFY
 setopt SHARE_HISTORY
 setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_REDUCE_BLANKS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
 
 setopt NO_CLOBBER
 setopt AUTO_CD
 setopt CORRECT
 setopt COMPLETE_ALIASES
+setopt NO_BEEP
+
+umask 022
 
 bindkey '^[[C' autosuggest-accept
 bindkey '^[[A' history-substring-search-up
@@ -231,7 +238,7 @@ alias mkdir='mkdir -p'
 alias cls='clear'
 alias h='history'
 alias j='jobs -l'
-alias path='echo -e ${PATH//:/\\n}'
+alias path='print -rl -- ${PATH//:/ }'
 
 alias gf='git fetch'
 alias gm='git merge'
@@ -262,6 +269,11 @@ alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/m
 mkcd() { mkdir -p "$1" && cd "$1"; }
 
 extract() {
+  if [ -z "$1" ]; then
+    echo "usage: extract <archive>"
+    return 1
+  fi
+
   if [ -f "$1" ]; then
     case "$1" in
       *.tar.bz2)   tar xjf "$1"     ;;
@@ -282,7 +294,18 @@ extract() {
   fi
 }
 
-killp() { ps aux | grep "$1" | grep -v grep | awk '{print $2}' | xargs kill -9 2>/dev/null; }
+killp() {
+  if [ -z "$1" ]; then
+    echo "usage: killp <pattern>"
+    return 1
+  fi
+
+  if command -v pgrep >/dev/null 2>&1; then
+    pgrep -f -- "$1" | xargs -r kill -9 2>/dev/null
+  else
+    ps aux | grep -F -- "$1" | grep -v grep | awk '{print $2}' | xargs -r kill -9 2>/dev/null
+  fi
+}
 
 backup() { cp "$1" "$1.backup.$(date +%Y%m%d_%H%M%S)"; }
 
